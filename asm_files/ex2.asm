@@ -27,6 +27,6 @@ LOOP_HW1:
 	jmp LOOP_HW1
 	
 NEGATIVE_HW1:
-	mov %rbx, (%rdx)   
+	mov %rbx, (destination)
 
 END_HW1:

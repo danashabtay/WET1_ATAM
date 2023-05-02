@@ -16,5 +16,5 @@ LOOP_HW1:
 	inc %rcx
 	jmp LOOP_HW1
 END_HW1:
-	movb %rax, Bool
+	movb %al, Bool
 

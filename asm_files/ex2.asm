@@ -5,7 +5,8 @@ _start:
 
 mov $0x0, %rcx
 mov $0x0, %rbx
-movslq num, %rbx
+movl num, %ebx
+movslq %ebx, %rbx
 cmp $0x0, %rbx
 jl NEGATIVE_HW1
 

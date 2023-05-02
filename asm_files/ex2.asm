@@ -5,5 +5,5 @@ _start:
 
 movl num, %eax
 movslq %eax, %rax
-leaq (destination), %rbx
+mov $destination, %rbx
 mov %rax, %rbx

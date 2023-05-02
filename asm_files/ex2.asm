@@ -17,8 +17,8 @@ LOOP_HW1:
 	cmp %rbx, %rcx
 	jg END_HW1
 	
-	movb (source, %rcx, $0x1), %al
-	movb %al, (destination, %rcx, $0x1)	
+	movb %rcx(source), %al
+	movb %al, %rcx(destination)	
 	inc %rcx	
 	jmp LOOP_HW1
 	

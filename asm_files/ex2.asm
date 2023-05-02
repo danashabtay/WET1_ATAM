@@ -5,13 +5,13 @@ _start:
 
 mov $0x0, %rcx
 mov $0x0, %rbx
-movl num, %ebx
-movslq %ebx, %rbx
+mov num, %ebx
+movsxd %ebx, %rbx
 cmp $0x0, %rbx
 jl NEGATIVE_HW1
 
-leaq (source), %rax
-leaq (destination), %rdx
+mov source, %rax
+mov destination, %rdx
 
 LOOP_HW1:
 	
@@ -28,6 +28,6 @@ LOOP_HW1:
 	jmp LOOP_HW1
 	
 NEGATIVE_HW1:
-	mov %rbx, destination
+	mov %rbx, %rdx
 
 END_HW1:

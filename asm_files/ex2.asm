@@ -20,8 +20,9 @@ LOOP_HW1:
 	cmp %rbx, %rcx
 	jg END_HW1
 	
-	movb ((%rax), %rcx, $0x1), %al
-	movb %al, ((%rdx), %rcx, $0x1)	
+	movb (%rax, %rcx, 1), %al
+	movb %al, (%rdx, %rcx, 1)	
+	
 	inc %rcx	
 	jmp LOOP_HW1
 	

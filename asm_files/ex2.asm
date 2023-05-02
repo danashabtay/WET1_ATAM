@@ -9,8 +9,8 @@ movslq num, %rbx
 cmp $0x0, %ebx
 jl NEGATIVE_HW1
 
-leag (source), %rax
-leag (destination), %rdx
+leaq (source), %rax
+leaq (destination), %rdx
 
 LOOP_HW1:
 	

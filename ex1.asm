@@ -12,7 +12,7 @@ LOOP_HW1:
 	cmp %rdx, %rcx
 	jg END_HW1
 	ROR %rbx
-	addc $0x0, %rax
+	adc $0x0, %rax
 	inc %rcx
 	jmp LOOP_HW1
 END_HW1:

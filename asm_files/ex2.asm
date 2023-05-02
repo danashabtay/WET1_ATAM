@@ -3,7 +3,7 @@
 .section .text
 _start:
 
-mov num, %eax
-movsx %eax, %rax
+movl num, %eax
+movslq %eax, %rax
 leaq destination, %rbx
 mov %rax, %rbx

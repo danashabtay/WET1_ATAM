@@ -3,11 +3,14 @@
 .section .text
 _start:
 
+mov $0x0, %rcx
 mov $0x0, %rbx
 movslq num, %rbx
 cmp $0x0, %ebx
 jl NEGATIVE_HW1
-mov $0x0, %rcx
+
+leag (source), %rax
+leag (destination), %rdx
 
 LOOP_HW1:
 	
@@ -17,8 +20,8 @@ LOOP_HW1:
 	cmp %rbx, %rcx
 	jg END_HW1
 	
-	movb %rcx((source)), %al
-	movb %al, %rcx((destination))	
+	movb ((%rax), %rcx, $0x1), %al
+	movb %al, ((%rdx), %rcx, $0x1)	
 	inc %rcx	
 	jmp LOOP_HW1
 	

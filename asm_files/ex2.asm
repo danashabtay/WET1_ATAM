@@ -6,7 +6,7 @@ _start:
 mov $0x0, %rcx
 mov $0x0, %rbx
 movslq num, %rbx
-cmp $0x0, %ebx
+cmp $0x0, %rbx
 jl NEGATIVE_HW1
 
 leaq (source), %rax
@@ -26,6 +26,6 @@ LOOP_HW1:
 	jmp LOOP_HW1
 	
 NEGATIVE_HW1:
-	movsx %rbx, (destination)
+	movsx %rbx, (%rdx)   
 
 END_HW1:

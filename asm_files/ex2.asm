@@ -5,24 +5,24 @@ _start:
 
 mov $0x0, %rdx
 movl num, %eax
-movslq %eax, %rax
 
 mov $source, %rcx
 
-cmp $0x0, %rax
+cmp $0x0, %eax
 jl NEGATIVE_HW1
 
 
 LOOP1_HW1:
 	
-	cmp $0x0, %rax
+	cmp $0x0, %eax
 	je END_HW1 
 
-	cmp %rax, %rdx
+	cmp %eax, %rdx
 	jg LOOP2_HW1
 	
 	movq (%rcx, %rdx, 1), %rbx
-	movb (%rbx), (%rbp, %rdx, 1)
+	movb (%rbx), %rbx
+	movb %rbx, (%r9, %rdx, 1)
 	
 	inc %rdx	
 	jmp LOOP1_HW1
@@ -33,17 +33,17 @@ mov $destination, %rbx
 
 LOOP2_HW1: 
 
-	cmp %rax, %rdx
+	cmp %eax, %rdx
 	jg END_HW1
 	
-	movq (%rbp, %rdx, 1), %rcx
-	movb (%rcx), (%rbx, %rdx, 1)	
+	movq (%r9, %rdx, 1), %rcx
+	movb (%rcx), %rcx	
+	movb %rcx, (%rbx, %rdx, 1)	
 	
 	inc %rdx	
 	jmp LOOP2_HW1
 
 NEGATIVE_HW1:
-	mov $destination, %rbx 
-	mov %rax, (%rbx)
+	movl %eax, destination
 
 END_HW1:

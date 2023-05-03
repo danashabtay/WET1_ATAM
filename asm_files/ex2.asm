@@ -19,7 +19,7 @@ LOOP1_HW1:
 	je END_HW1 
 
 	cmp %rax, %rdx
-	jg END_HW1
+	jg LOOP2_HW1
 	
 	movb ((%rcx), %rdx, 1), %al
 	movb %al, ((%rbp), %rdx, 1)	

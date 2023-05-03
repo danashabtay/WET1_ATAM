@@ -22,7 +22,8 @@ LOOP1_HW1:
 	jg LOOP2_HW1
 	
 	movq (%rcx, %rdx, 1), %rbx
-	movb (%rbx), (%rbp, %rdx, 1)	
+	movb (%rbx), %bl
+	movb %bl, (%rbp, %rdx, 1)
 	
 	inc %rdx	
 	jmp LOOP1_HW1
@@ -37,7 +38,8 @@ LOOP2_HW1:
 	jg END_HW1
 	
 	movq (%rbp, %rdx, 1), %rcx
-	movb (%rcx), (%rbx, %rdx, 1)	
+	movb (%rcx), %cl	
+	movb %cl, (%rbx, %rdx, 1)	
 	
 	inc %rdx	
 	jmp LOOP2_HW1

@@ -9,11 +9,12 @@ movl (num), %eax
 movq $source, %r8
 movq $destination, %rbx 
 cmpl $0x0, %eax
-jl NEGATIVE_HW1
+jle NEGATIVE_HW1
 
 cmpq %r8, %rbx 
 jg LOOP2_HW1
 
+subl %0x1, %eax
 LOOP1_HW1:
 	
 	movb (%r8), %cl

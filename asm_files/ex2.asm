@@ -27,9 +27,10 @@ LOOP1_HW1:
 LOOP2_HW1:
 	addq num, %r8
 	addq num, %rbx
+	movb (%r8), %cl
+	movb %cl, (%rbx)
 	decq %r8
 	decq %rbx
-	decl %eax
 	decl %eax
 	jnz LOOP2_HW1
 	jmp END_HW1

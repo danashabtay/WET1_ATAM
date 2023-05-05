@@ -25,8 +25,8 @@ LOOP1_HW1:
 	jmp END_HW1
 	
 LOOP2_HW1:
-	movb (%r8, %eax,1), %cl
-	movb %cl, (%rbx, %eax,1)
+	movb (%r8, %rax,1), %cl
+	movb %cl, (%rbx, %rax,1)
 	decl %eax
 	jnz LOOP2_HW1
 	jmp END_HW1

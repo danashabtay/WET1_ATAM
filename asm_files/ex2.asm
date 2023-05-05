@@ -35,11 +35,11 @@ LOOP1_HW1:
 	;jmp LOOP1_HW1
 	
 LOOP2_HW1:
-	movb %eax(%r8), %cl
-	movb %cl, %eax(%rbx)
+	movb (%r8, %eax), %cl
+	movb %cl, (%rbx, %eax)
 	decl %eax
-	jnz LOOP1_HW2
-	jmp END_HW1:
+	jnz LOOP2_HW1
+	jmp END_HW1
 
 NEGATIVE_HW1:
 	movl %eax, (destination)

@@ -22,11 +22,11 @@ LOOP1_HW1:
 	incq %rbx
 	decl %eax
 	jnz LOOP1_HW1
-	jmp END_HW1:
+	jmp END_HW1
 	
 LOOP2_HW1:
-	movb (%r8, %eax), %cl
-	movb %cl, (%rbx, %eax)
+	movb (%r8, %eax,1), %cl
+	movb %cl, (%rbx, %eax,1)
 	decl %eax
 	jnz LOOP2_HW1
 	jmp END_HW1

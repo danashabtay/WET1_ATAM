@@ -4,6 +4,8 @@
 _start:
 
 movl (num), %eax
+movl %eax, %edx
+subl $0x1, %edx
 
 movq $source, %r8
 movq $destination, %rbx 
@@ -24,8 +26,6 @@ LOOP1_HW1:
 	jmp END_HW1
 	
 LOOP2_HW1:
-	movl %eax, %edx
-	subl $0x1, %edx
 	addq %rdx, %r8
 	addq %rdx, %rbx
 	movb (%r8), %cl

@@ -14,7 +14,7 @@ jle NEGATIVE_HW1
 cmpq %r8, %rbx 
 jg LOOP2_HW1
 
-subl %0x1, %eax
+subl $0x1, %eax
 LOOP1_HW1:
 	
 	movb (%r8), %cl

@@ -11,6 +11,8 @@ movq $destination, %rbx
 cmpl $0x0, %eax
 jl NEGATIVE_HW1
 
+cmpq %r8, %rbx ;checking distance between destination and source for overlaping
+jg LOOP2_HW1
 
 LOOP1_HW1:
 
@@ -23,6 +25,7 @@ LOOP1_HW1:
 	incq %rbx
 	decl %eax
 	jnz LOOP1_HW1
+	jmp END_HW1:
 	
 	; movq (%r8, %rdx, 1), %r9
 	; movb (%r9), %cl
@@ -31,6 +34,12 @@ LOOP1_HW1:
 	; incl %edx	
 	;jmp LOOP1_HW1
 	
+LOOP2_HW1:
+	movb %eax(%r8), %cl
+	movb %cl, %eax(%rbx)
+	decl %eax
+	jnz LOOP1_HW2
+	jmp END_HW1:
 
 NEGATIVE_HW1:
 	movl %eax, (destination)

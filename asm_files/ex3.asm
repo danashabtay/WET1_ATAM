@@ -9,47 +9,43 @@ movl $mergedArray, %ecx
 movl $0x0, (%ecx)
 
 CHECK_LOOP_HW1:
-	movl (%ecx), %r8d
 	movl (%eax), %r9d
 	movl (%ebx), %r10d
-	
-	cmp %r9d, %r10d 
-	jb LOOP1_HW1
-	ja LOOP2_HW1
-	je LOOP_EQUAL_HW1
 
-LOOP1_HW1:
-	cmp %r8d, %r9d 
-	je CHECK_LOOP_HW1
-	
+	movl $0, %edx   # Initialize loop counter
+
+CHECK_MERGED_ARRAY:
+	cmpl $0, (%ecx, %edx, 4)
+	je ADD_TO_MERGED_ARRAY_HW1
+
+	cmpl %r9d, (%ecx, %edx, 4)
+	jne COMPARE_ARRAY2_HW1
+
+	# The element already exists in mergedArray
+	jmp NEXT_HW1
+
+COMPARE_ARRAY2_HW1:
+	cmpl %r10d, (%ecx, %edx, 4)
+	jne NEXT_HW1
+
+	# The element already exists in mergedArray
+	jmp NEXT_HW1
+
+ADD_TO_MERGED_ARRAY_HW1:
 	movl %r9d, (%ecx)
 	addl $4, %ecx
-	addl $4, %eax
-	jmp CHECK_LOOP_HW1
+	jmp NEXT_HW1
 
-LOOP2_HW1:
-	cmp %r8d, %r10d 
-	je CHECK_LOOP_HW1
-	
-	movl %r10d, (%ecx)
-	addl $4, %ecx
-	addl $4, %ebx	
-	jmp CHECK_LOOP_HW1
-
-LOOP_EQUAL_HW1:
-	cmp $0x0, %r9d
-	je END_HW1
-	
-	cmp %r8d, %r9d
-	je CHECK_LOOP_HW1
-	
-	movl %r9d, (%ecx)
-	addl $4, %ecx
+NEXT_HW1:
 	addl $4, %eax
 	addl $4, %ebx
-	
-	jmp CHECK_LOOP_HW1
-	
-END_HW1:
-	movl $0x0, (%ecx)
-	
+	addl $4, %edx
+
+	# Check if we've reached the end of either array
+	cmpl $0, (%eax)
+	jne CHECK_LOOP_HW1
+
+	cmpl $0, (%ebx)
+	jne CHECK_LOOP_HW1
+
+	movl $0x0, (%ecx)  # Add 0 to end of mergedArray

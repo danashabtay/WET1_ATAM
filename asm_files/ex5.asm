@@ -10,7 +10,7 @@ testq %rax, %rax
 je EMPTY_TREE_HW1
 
 COMPARE_LOOP_W1:
-	cmpq (%rax), (%rdx)
+	cmpq $new_node, (%rax)
 	je END_HW1
 	
 	ja RIGHT_NODE_HW1

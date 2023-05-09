@@ -25,6 +25,8 @@ LOOP1_HW1:
 	movl (%ecx), %r8d
 	addl $4, %ecx
 	addl $4, %eax
+	
+	jmp MAIN_LOOP_HW1
 
 LOOP2_HW1:
 	cmp %r8d, %r10d 
@@ -33,6 +35,8 @@ LOOP2_HW1:
 	movl (%ecx), %r8d
 	addl $4, %ecx
 	addl $4, %ebx
+	
+	jmp MAIN_LOOP_HW1
 
 LOOP_EQUAL_HW1:
 	cmp $0x0, %r9d
@@ -46,6 +50,8 @@ LOOP_EQUAL_HW1:
 	addl $4, %ecx
 	addl $4, %eax
 	addl $4, %ebx
+	
+	jmp MAIN_LOOP_HW1
 	
 END_HW1:
 	movl $0x0, (%ecx)

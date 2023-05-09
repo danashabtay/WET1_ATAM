@@ -4,50 +4,48 @@
 _start:
 
 movl $Value, %ebx
-movl head, %edi
-movl source, %ecx
+movq head, %rdi
+movq Source, %rcx
 movl (%ecx), %r8d
 
 FIND_VAL_HW1:
-	testl %edi, %edi
+	testl %rdi, %rdi
 	je END_HW1
 
-	movl (%edi), %eax
-	cmp %eax, %ebx
+	cmpl (%rdi), %ebx
 	je FIND_SOURCE_HW1
 	
-	movl %edi, %edx ;SAVE ADDRESS OF NODE BEFORE VAL TO %EDX
-	addl $8, %edi
+	movl %rdi, %rdx ;SAVE ADDRESS OF NODE BEFORE VAL TO %RDX
+	addl $8, %rdi
 	jmp FIND_VAL_HW1 
 	
 FIND_SOURCE_HW1:
-	movl %edi, %esi ;SAVE ADDRESS OF VAL TO %ESI
-	movl head, %edi
+	movq %rdi, %rsi ;SAVE ADDRESS OF VAL TO %ESI
+	movq head, %rdi
 	
 	SOURCE_LOOP_HW1:
-		movl (%edi), %ecx
-		cmp %ecx, %r8d
+		cmpl (%rdi), %r8d
 		je SWITCH_HW1 ;ADDRESS OF SOURCE IS SAVED IN %EDI
 		
-		movl %edi, %r9d ;SAVE ADDRESS OF NODE BEFORE SOURCE TO %R9D
-		addl $8, %edi
+		movl %rdi, %r9 ;SAVE ADDRESS OF NODE BEFORE SOURCE TO %R9D
+		addl $8, %rdi
 		jmp SOURCE_LOOP_HW1 
 
 
 SWITCH_HW1: 
-	movl 4(%edx), %r10d
-	movl %ecx, (%r10d)
+	movq 4(%rdx), %r10
+	movq %rcx, (%r10)
 	
-	movl 4(%edi), %r8d
-	movl 4(%esi), %r13d
-	movl 4(%esi), %r11d
-	movl %r8d, (%r11d)
+	movq 4(%rdi), %r8
+	movq 4(%rsi), %r13
+	movq 4(%rsi), %r11
+	movq %r8, (%r11)
 	
-	movl 4(%ecx), %ebx
-	movl %esi, (%ebx)
+	movq 4(%rcx), %rbx
+	movq %rsi, (%rbx)
 	
-	movl 4(%edi), %r12d
-	movl %r13d, (%r12d)
+	movq 4(%rdi), %r12
+	movq %r13, (%r12)
 
 END_HW1:
 

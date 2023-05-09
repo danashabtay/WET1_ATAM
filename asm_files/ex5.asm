@@ -10,9 +10,9 @@ testq %rax, %rax
 je EMPTY_TREE_HW1
 
 SEARCH_LOOP_W1:
-	cmpq new_node, (%rax)
+	movq (%rax), %rcx
+	cmpq new_node, %rcx
 	je END_HW1
-
 	js RIGHT_NODE_HW1	
 	
 LEFT_NODE_HW1:

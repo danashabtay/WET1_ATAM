@@ -20,14 +20,14 @@ FIND_VAL_HW1:
 	jmp FIND_VAL_HW1 
 	
 FIND_SOURCE_HW1:
-	movq %rdi, %rsi ;SAVE ADDRESS OF VAL TO %ESI
+	movq %rdi, %rsi ;SAVE ADDRESS OF VAL TO %RSI
 	movq head, %rdi
 	
 	SOURCE_LOOP_HW1:
 		cmpl (%rdi), %r8d
-		je SWITCH_HW1 ;ADDRESS OF SOURCE IS SAVED IN %EDI
+		je SWITCH_HW1 ;ADDRESS OF SOURCE IS SAVED IN %RDI
 		
-		movl %rdi, %r9 ;SAVE ADDRESS OF NODE BEFORE SOURCE TO %R9D
+		movl %rdi, %r9 ;SAVE ADDRESS OF NODE BEFORE SOURCE TO %R9
 		addl $8, %rdi
 		jmp SOURCE_LOOP_HW1 
 

@@ -11,7 +11,7 @@ je EMPTY_TREE_HW1
 
 SEARCH_LOOP_W1:
 	movq (%rax), %rcx
-	cmpq new_node, %rcx
+	cmpq %rdx, %rcx
 	je END_HW1
 	js RIGHT_NODE_HW1	
 	

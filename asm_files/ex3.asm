@@ -9,7 +9,6 @@ movl $mergedArray, %ecx
 movl $0x0, %edx
 
 CHECK_LOOP_HW1:
-	movl (%ecx), %r8d
 	movl (%eax), %r9d
 	movl (%ebx), %r10d
 	
@@ -23,14 +22,17 @@ COPY_LOOP1_HW1:
 	je DUP1_LOOP_HW1
 	
 	movl %r9d, (%ecx)
-	movl (%ecx), %edx
+	movl %r9d, %edx
 	addl $4, %ecx
 	addl $4, %eax
 	jmp CHECK_LOOP_HW1
 
 COPY_LOOP2_HW1:
+	cmp %edx, %r10d
+	je DUP2_LOOP_HW1
+
 	movl %r10d, (%ecx)
-	movl (%ecx), %edx
+	movl %r10d, %edx
 	addl $4, %ecx
 	addl $4, %ebx	
 	jmp CHECK_LOOP_HW1
@@ -50,6 +52,7 @@ LOOP_EQUAL_HW1:
 	je END_HW1
 	
 	movl %r9d, (%ecx)
+	movl %r9d, %edx
 	addl $4, %ecx
 	addl $4, %eax
 	addl $4, %ebx

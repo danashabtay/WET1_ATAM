@@ -43,12 +43,14 @@ SWAP_SRC_FIRST_HW1: # %r11 = pre_val %r8=src %r9=val_node
 	movq %rbx, 4(%r8)
 	movq %r8, 4(%r11)
 	movq %r9, head
+	jmp END_HW1
 	
 ADJ_1:
 	movq 4(%r9), %rbx # %rbx=val_next
 	movq %rbx, 4(%r8)
 	movq %r8, 4(%r9)
 	movq %r9, head
+	jmp END_HW1
 
 VALUE_HEAD_HW1: #r9=head=val_node %r8=src
 	movq %r9, %rdi
@@ -72,12 +74,14 @@ SWAP_VAL_FIRST_HW1: #r9=head=val_node %r8=src %r12=pre_src
 	movq %rbx, 4(%r8)
 	movq %r9, 4(%r12)
 	movq %r8, head
+	jmp END_HW1
 	
 ADJ_2_HW1:
 	movq 4(%r8), %rax # %rax=src_next
 	movq %rax, 4(%r9)
 	movq %r9, 4(%r8)
 	movq %r8, head
+	jmp END_HW1
 
 BOTH_MIDDLE_HW1:
 	movq %r9, %rdi

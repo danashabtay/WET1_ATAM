@@ -23,7 +23,7 @@ SEARCH_VALUE_HW1:
 	cmpq $0, 4(%rdi) #check if next node is null
     je END_HW1
 	
-	movl %rdi, %r8 #save previos to val in %r8
+	movq %rdi, %r8 #save previos to val in %r8
 	movq 4(%rdi), %rdi
 	jmp SEARCH_VALUE_HW1
 
@@ -34,7 +34,7 @@ SEARCH_SOURCE_HW1:
 		cmpl %edx, (%rdi) #check if node==src
 		je SWITCH_HW1
 		
-		movl %rdi, %r9 #save previos to source in %r9
+		movq %rdi, %r9 #save previos to source in %r9
 		movq 4(%rdi), %rdi
 		jmp SOURCE_LOOP_HW1		
 

@@ -42,6 +42,11 @@ SEARCH_SOURCE_HW1:
 SWITCH_HW1: 
 #r10=val rdi=src r8=preval r9=presrc
 
+	movq 4(%rdi), %rax #save src_next in %rax
+	movq 4(%r10), %rbx #save val_next in %rbx
+	movq %rax, 4(%r10)
+	movq %rbx, 4(%rdi)
+	
 	cmpq $0, %r8
     je NO_PREVAL_HW1
 	movq %rdi, 4(%r8)
@@ -49,19 +54,11 @@ SWITCH_HW1:
     je NO_PRESRC_HW1
 	movq %r10, 4(%r9)
 	
-	movq 4(%rdi), %rax #save src_next in %rax
-	movq 4(%r10), %rbx #save val_next in %rbx
-	movq %rax, 4(%r10)
-	movq %rbx, 4(%rdi)
 	jmp END_HW1
 	
 	
 NO_PREVAL_HW1:
 	movq %r10, 4(%r9)
-	movq 4(%rdi), %rax #save src_next in %rax
-	movq 4(%r10), %rbx #save val_next in %rbx
-	movq %rax, 4(%r10)
-	movq %rbx, 4(%rdi)
 	cmpq %rdi, head
 	jne END_HW1
 	movq %r10, head
@@ -69,10 +66,6 @@ NO_PREVAL_HW1:
 	
 NO_PRESRC_HW1: 	
 	movq %rdi, 4(%r8)
-	movq 4(%rdi), %rax #save src_next in %rax
-	movq 4(%r10), %rbx #save val_next in %rbx
-	movq %rax, 4(%r10)
-	movq %rbx, 4(%rdi)
 	cmpq %r10, head
 	jne END_HW1
 	movq %rdi, head

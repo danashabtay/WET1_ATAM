@@ -77,8 +77,7 @@ SET_PRE_HW1:
 	cmpq $0, %r9
     je NO_PRESRC_HW1
 	movq %r10, 4(%r9)
-	jmp END_HW1
-	
+	jmp END_HW1	
 	
 NO_PREVAL_HW1:
 	movq %r10, 4(%r9)
@@ -88,7 +87,6 @@ NO_PREVAL_HW1:
 	jmp END_HW1
 	
 NO_PRESRC_HW1: 	
-	movq %rdi, 4(%r8)
 	cmpq %rdi, head
 	jne END_HW1
 	movq %r10, head

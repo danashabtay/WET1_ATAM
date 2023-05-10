@@ -4,10 +4,12 @@
 _start:
 
 movq head, %rdi
-#cmpq $0, %rdi
-#je END_HW1
+cmpq $0, %rdi
+je END_HW1
 
 movq Source, %rcx
+cmpq $0, %rcx
+je END_HW1
 movl $Value, %ebx
 movl (%rcx), %edx
 cmpl %edx, %ebx

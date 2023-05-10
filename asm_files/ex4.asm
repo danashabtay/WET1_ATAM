@@ -8,7 +8,7 @@ cmpq $0, %rdi
 je END_HW1
 
 movq Source, %rcx
-movl Value, %ebx
+movl $Value, %ebx
 movl (%rcx), %edx
 cmpl %edx, %ebx
 je END_HW1

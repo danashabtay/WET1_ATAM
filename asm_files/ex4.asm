@@ -3,49 +3,66 @@
 .section .text
 _start:
 
-movl $Value, %ebx
 movq head, %rdi
+cmpq $0, %rdi
+je END_HW1
+
 movq Source, %rcx
-movl (%ecx), %r8d
+movl $Value, %ebx
+cmpl (%rcx), %ebx
+je END_HW1
 
-FIND_VAL_HW1:
-	testq %rdi, %rdi
-	je END_HW1
+movq $0, %r8 #previous node to value
+movq $0, %r9 #previous node to source
 
-	cmpl (%rdi), %ebx
-	je FIND_SOURCE_HW1
+SEARCH_VALUE_HW1:
+	movq %rdi, %r10 #val
+	cmpl (%rdi), %ebx #check if node==val
+	je SEARCH_SOURCE_HW1
 	
-	movq %rdi, %rdx #SAVE ADDRESS OF NODE BEFORE VAL TO %RDX
-	addq $8, %rdi
-	jmp FIND_VAL_HW1 
+	cmpq $0, 4(%rdi) #check if next node is null
+    je END_HW1
 	
-FIND_SOURCE_HW1:
-	movq %rdi, %rsi #SAVE ADDRESS OF VAL TO %RSI
+	movl %rdi, %r8 #save previos to val in %r8
+	movq 4(%rdi), %rdi
+	jmp SEARCH_VALUE_HW1
+
+SEARCH_SOURCE_HW1:
 	movq head, %rdi
-	
+	movl (%rcx), %edx 
 	SOURCE_LOOP_HW1:
-		cmpl (%rdi), %r8d
-		je SWITCH_HW1 #ADDRESS OF SOURCE IS SAVED IN %RDI
+		cmpl %edx, (%rdi) #check if node==src
+		je SWITCH_HW1
 		
-		movq %rdi, %r9 #SAVE ADDRESS OF NODE BEFORE SOURCE TO %R9
-		addq $8, %rdi
-		jmp SOURCE_LOOP_HW1 
-
+		movl %rdi, %r9 #save previos to source in %r9
+		movq 4(%rdi), %rdi
+		jmp SOURCE_LOOP_HW1		
 
 SWITCH_HW1: 
-	movq 4(%rdx), %r10
-	movq %rcx, (%r10)
+#r10=val rdi=src r8=preval r9=presrc
+
+	movq 4(%rdi), %rax #save src_next in %rax
+	movq 4(%r10), %rbx #save val_next in %rbx
 	
-	movq 4(%rdi), %r8
-	movq 4(%rsi), %r13
-	movq 4(%rsi), %r11
-	movq %r8, (%r11)
+	movq %rax, 4(%r10)
+	movq %rbx, 4(%rdi)
 	
-	movq 4(%rcx), %rbx
-	movq %rsi, (%rbx)
+	cmpq $0, %r8
+    je NO_PREVAL_HW1
+	cmpq $0, %r9
+    je NO_PRESRC_HW1
 	
-	movq 4(%rdi), %r12
-	movq %r13, (%r12)
+	movq %rdi, 4(%r8)
+	movq %r10, 4(%r9)
+	jmp END_HW1
+	
+NO_PREVAL_HW1: #val was head -> src is now head
+	movq %r10, 4(%r9)
+	movq %rdi, head
+	jmp END_HW1
+	
+NO_PRESRC_HW1: #src was head -> val is now head
+	movq %rdi, 4(%r8)	
+	movq %r10, head
 
 END_HW1:
-

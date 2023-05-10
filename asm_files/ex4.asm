@@ -76,7 +76,7 @@ SWAP_VAL_FIRST_HW1: #r9=head=val_node %r8=src %r12=pre_src
 ADJ_2_HW1:
 	movq 4(%r8), %rax # %rax=src_next
 	movq %rax, 4(%r9)
-	movq (%r9), 4(%r8)
+	movq %r9, 4(%r8)
 	movq %r8, head
 
 BOTH_MIDDLE_HW1:

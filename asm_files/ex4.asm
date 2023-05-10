@@ -18,10 +18,10 @@ je END_HW1
 movq $0, %r8 #previous node to value
 movq $0, %r9 #previous node to source
 
-SEARCH_VALUE_HW1:
+SEARCH_VALUE_HW1: #find value and it's prev node
 	movq %rdi, %r10 #val
 	cmpl (%rdi), %ebx #check if node==val
-	je SEARCH_SOURCE_HW1
+	je SEARCH_SOURCE_HW1 #if value is in the middle
 	
 	cmpq $0, 4(%rdi) #check if next node is null
     je END_HW1
@@ -34,7 +34,7 @@ SEARCH_SOURCE_HW1:
 	movq head, %rdi
 	movl (%rcx), %edx 
 	SOURCE_LOOP_HW1:
-		cmpl %edx, (%rdi) #check if node==src
+		cmpq %rcx, %rdi #check if node==src
 		je SWITCH_HW1
 		
 		movq %rdi, %r9 #save previous to source in %r9

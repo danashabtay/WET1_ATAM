@@ -9,7 +9,7 @@ je END_HW1
 
 movq Source, %rcx
 movl $Value, %ebx
-cmpl %rcx, %ebx
+cmpl (%rcx), %ebx
 je END_HW1
 
 movq $0, %r8 #previous node to value

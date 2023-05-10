@@ -12,22 +12,22 @@ jmp END_HW1
 cmpq $0, %r9
 jmp END_HW1
 
-compq %r8, %r9
+cmpq %r8, %r9
 je SOURCE_HEAD_HW1
 
-movl $Value, %r10
-cmpl (%r9), %r10
+movl $Value, %r10d
+cmpl (%r9), %r10d
 je VALUE_HEAD_HW1
 
 jmp BOTH_MIDDLE_HW1
 
 SOURCE_HEAD_HW1: #r9=r8=head=src  
-	movl $Value, %r10
-	cmpl (%r9), %r10
+	movl $Value, %r10d
+	cmpl (%r9), %r10d
 	je END_HW1
 	
 	VALUE_LOOP:
-		cmpl (%r9), %r10
+		cmpl (%r9), %r10d
 		je SWAP_SRC_FIRST_HW1
 		movq %r9, %r11 # %r11 = pre_val
 		movq 4(%r9), %r9
@@ -76,28 +76,28 @@ SWAP_VAL_FIRST_HW1: #r9=head=val_node %r8=src %r12=pre_src
 ADJ_2_HW1:
 	movq 4(%r8), %rax # %rax=src_next
 	movq %rax, 4(%r9)
-	movq %r9), 4(%r8)
+	movq (%r9), 4(%r8)
 	movq %r8, head
 
 BOTH_MIDDLE_HW1:
 	movq %r9, %rdi
 	FIND_VAL_HW1:
-		cmpl (%r9), %r10	
+		cmpl (%r9), %r10d	
 		je FIND_SRC_HW1
-		cmpq $0, $r9 #val not found
+		cmpq $0, %r9 #val not found
 		jmp END_HW1
 		movq %r9, %r11 # %r11=preval
 		movq 4(%r9), %r9
 		jmp FIND_VAL_HW1
 		
-FIND_SRC_HW1: %r8=src %rdi=head %r11=preval %r9=val_node
+FIND_SRC_HW1: # %r8=src %rdi=head %r11=preval %r9=val_node
 	cmpq %r8, %rdi
 	je SWAP2_HW1
 	movq %rdi, %r12 # %r12=presrc
 	movq 4(%rdi), %rdi
 	jmp FIND_SRC_HW1
 	
-SWAP2_HW1:	%r8=src %r12=presrc %r11=preval %r9=val_node
+SWAP2_HW1:	# %r8=src %r12=presrc %r11=preval %r9=val_node
  cmpq %r12, %r9
  je ADJ_VAL_SRC_HW1
  cmpq %r11, %r8
@@ -114,14 +114,14 @@ SWAP2_HW1:	%r8=src %r12=presrc %r11=preval %r9=val_node
  ADJ_VAL_SRC_HW1:
 	movq 4(%r8), %rax # %rax=src_next
 	movq %r8, 4(%r11)
-	movq %r9, 4(r8)
+	movq %r9, 4(%r8)
 	movq %rax, 4(%r9)
 	jmp END_HW1
 	
 ADJ_SRC_VAL_HW1:
 	movq 4(%r9), %rbx # %rbx=val_next
 	movq %r9, 4(%r12)
-	movq %r8, 4(r9)
+	movq %r8, 4(%r9)
 	movq %rax, 4(%r8)
 	jmp END_HW1
 

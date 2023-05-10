@@ -4,8 +4,8 @@
 _start:
 
 movq head, %rdi
-cmpq $0, %rdi
-je END_HW1
+#cmpq $0, %rdi
+#je END_HW1
 
 movq Source, %rcx
 movl $Value, %ebx

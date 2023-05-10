@@ -44,16 +44,39 @@ SWITCH_HW1:
 
 	movq 4(%rdi), %rax #save src_next in %rax
 	movq 4(%r10), %rbx #save val_next in %rbx
+	cmpq %rbx, %rdi
+	je ADJ_VAL_SRC_HW1
+	cmpq %rax, %r10
+	je ADJ_SRC_VAL_HW1
 	movq %rax, 4(%r10)
 	movq %rbx, 4(%rdi)
+	jmp SET_PRE_HW1
 	
+ADJ_VAL_SRC_HW1:
+	movq %rax, 4(%r10)
+	movq %r10, 4(%rdi)
+	cmpq $0, %r8
+    je NO_PREVAL_HW1
+	movq %rdi, 4(%r8)
+	jmp END_HW1
+
+	
+ADJ_SRC_VAL_HW1:	
+	movq %rbx, 4(%rdi)
+	movq %rdi, 4(%r10)
+	jmp SET_PRE_HW1
+	cmpq $0, %r9
+    je NO_PRESRC_HW1
+	movq %r10, 4(%r9)
+	jmp END_HW1
+	
+SET_PRE_HW1:
 	cmpq $0, %r8
     je NO_PREVAL_HW1
 	movq %rdi, 4(%r8)
 	cmpq $0, %r9
     je NO_PRESRC_HW1
 	movq %r10, 4(%r9)
-	
 	jmp END_HW1
 	
 	
